@@ -376,10 +376,10 @@ class SEOManager
     /**
      * Handle magic set.
      *
-     * @return string|array|null
+     * @return void
      */
     public function __set(string $key, string $value)
     {
-        return $this->set(Str::snake($key, '.'), $value);
+        $this->set(Str::snake($key, '.'), $value);
     }
 }
