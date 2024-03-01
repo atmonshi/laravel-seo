@@ -12,11 +12,20 @@ jobs:
     strategy:
       matrix:
         laravel: [8, 9, 10, 11]
-
+        include:
+          - laravel: 10.*
+            testbench: 8.*
+            carbon: ^2.63
+          - laravel: 11.*
+            testbench: 9.*
+            carbon: ^2.72.2
+        exclude:
+          - laravel: 11.*
+            php: 8.1
     steps:
     - uses: actions/checkout@v2
     - name: Install composer dependencies
-      run: composer require "laravel/framework:^${{matrix.laravel}}.0"
+      run: composer require "laravel/framework:^${{matrix.laravel}}.0" "nesbot/carbon:${{ matrix.carbon }}"
     - name: Run tests
       run: vendor/bin/pest
 
